@@ -1201,6 +1201,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <script src="config.js"></script>
   <script>
     const WHATSAPP_NUMBER = "5491139413541";
 
@@ -2079,7 +2080,85 @@
     });
 
 
-    async function loadProductsFromJson() {
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let value = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' && insideQuotes && nextChar === '"') {
+          value += '"';
+          i++;
+        } else if (char === '"') {
+          insideQuotes = !insideQuotes;
+        } else if (char === "," && !insideQuotes) {
+          row.push(value);
+          value = "";
+        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+          if (char === "\r" && nextChar === "\n") i++;
+          row.push(value);
+          if (row.some(cell => String(cell).trim() !== "")) rows.push(row);
+          row = [];
+          value = "";
+        } else {
+          value += char;
+        }
+      }
+
+      row.push(value);
+      if (row.some(cell => String(cell).trim() !== "")) rows.push(row);
+      return rows;
+    }
+
+    function normalizeSheetProducts(csvText) {
+      const rows = parseCSV(csvText);
+      if (!rows.length) return [];
+
+      const headers = rows[0].map(h => String(h || "").trim().toLowerCase());
+      const required = ["id", "name", "specs", "cost", "cat", "emoji", "img", "visible"];
+
+      return rows.slice(1).map((row, index) => {
+        const item = {};
+        headers.forEach((header, colIndex) => {
+          item[header] = row[colIndex] || "";
+        });
+
+        return {
+          id: Number(item.id) || index + 1,
+          name: String(item.name || "").trim(),
+          specs: String(item.specs || "").trim(),
+          cost: Number(String(item.cost || "0").replace(/[^0-9.,-]/g, "").replace(",", ".")) || 0,
+          cat: String(item.cat || "").trim() || "General",
+          emoji: String(item.emoji || "📦").trim() || "📦",
+          img: String(item.img || "").trim(),
+          visible: !["false", "0", "no", "oculto"].includes(String(item.visible || "true").trim().toLowerCase())
+        };
+      }).filter(product => product.name);
+    }
+
+    async function loadProductsFromSheet() {
+      const sheetUrl = (window.KALESI_SHEET_CSV_URL || "").trim();
+
+      if (sheetUrl) {
+        try {
+          const separator = sheetUrl.includes("?") ? "&" : "?";
+          const response = await fetch(`${sheetUrl}${separator}cacheBust=${Date.now()}`, { cache: "no-store" });
+          if (!response.ok) throw new Error("No se pudo leer Google Sheets");
+          const csvText = await response.text();
+          const sheetProducts = normalizeSheetProducts(csvText);
+          if (Array.isArray(sheetProducts) && sheetProducts.length) {
+            products = sheetProducts;
+            return;
+          }
+        } catch (error) {
+          console.warn("KALESI: no se pudo cargar Google Sheets. Se usa products.json o catálogo embebido.", error);
+        }
+      }
+
       try {
         const response = await fetch("products.json", { cache: "no-store" });
         if (!response.ok) return;
@@ -2093,7 +2172,7 @@
     }
 
     loadCustomer();
-    loadProductsFromJson().finally(() => {
+    loadProductsFromSheet().finally(() => {
       render();
       renderCart();
     });
