@@ -1,624 +1,609 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Admin — Importador del Norte</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:#0f2557;--navy-mid:#1a3a6b;--navy-light:#2a52a0;
-  --off:#f5f6fa;--gray-l:#e8ecf4;--gray-m:#b0b8cc;--gray-t:#5a6380;--text:#0d1b3e;
-  --green:#16a34a;--green-l:#dcfce7;--amber:#b45309;--amber-l:#fef3c7;
-  --rose:#be123c;--rose-l:#ffe4e6;--blue-l:#dbeafe;--r:12px;--rs:8px;
-}
-body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh}
-
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--navy)}
-.login-box{background:#fff;border-radius:20px;padding:40px;width:340px;text-align:center}
-.login-logo{width:56px;height:56px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff}
-.login-box h1{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
-.login-box p{font-size:13px;color:var(--gray-t);margin-bottom:24px}
-.login-box input{width:100%;padding:11px 14px;border:1.5px solid var(--gray-l);border-radius:var(--rs);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px}
-.login-box input:focus{border-color:var(--navy-mid)}
-.login-box button{width:100%;padding:11px;background:var(--navy);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
-.login-box button:hover{background:var(--navy-mid)}
-.login-err{color:#c8102e;font-size:12px;margin-top:8px;display:none}
-
-#admin-app{display:none}
-header{background:var(--navy);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
-.brand span{font-size:11px;font-weight:400;color:rgba(255,255,255,.5);background:rgba(255,255,255,.1);padding:2px 8px;border-radius:20px}
-.logout-btn{font-size:12px;color:rgba(255,255,255,.6);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif}
-.logout-btn:hover{color:#fff}
-
-.tabs{background:#fff;border-bottom:1px solid var(--gray-l);display:flex;padding:0 24px;gap:4px}
-.tab{padding:14px 18px;font-size:13px;font-weight:500;color:var(--gray-t);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif}
-.tab:hover{color:var(--navy)}
-.tab.active{color:var(--navy);border-bottom-color:var(--navy)}
-
-.main{max-width:1100px;margin:0 auto;padding:28px 24px}
-
-.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px}
-.stat-card{background:#fff;border-radius:var(--r);border:1.5px solid var(--gray-l);padding:16px}
-.stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--navy)}
-.stat-label{font-size:11px;color:var(--gray-t);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
-
-.section{background:#fff;border-radius:var(--r);border:1.5px solid var(--gray-l);padding:24px;margin-bottom:20px}
-.section-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--blue-l);color:var(--navy-mid)}
-.badge-green{background:var(--green-l);color:var(--green)}
-.badge-amber{background:var(--amber-l);color:var(--amber)}
-
-textarea{width:100%;min-height:160px;padding:12px 14px;border:1.5px solid var(--gray-l);border-radius:var(--rs);font-size:12px;font-family:monospace;color:var(--text);background:var(--off);resize:vertical;outline:none;line-height:1.6}
-textarea:focus{border-color:var(--navy-mid)}
-
-.hint-box{background:var(--blue-l);border-radius:var(--rs);padding:12px 14px;font-size:12px;color:var(--navy-mid);line-height:1.7;margin-bottom:14px}
-.hint-box strong{font-weight:500}
-
-.info-box{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:var(--rs);padding:14px 16px;font-size:13px;color:#166534;line-height:1.7;margin-bottom:16px}
-.info-box strong{font-weight:500}
-.info-box a{color:#166534;font-weight:500}
-
-.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:var(--rs);font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s}
-.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:var(--navy-mid)}
-.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803d}
-.btn-ghost{background:transparent;color:var(--gray-t);border:1.5px solid var(--gray-l)}.btn-ghost:hover{border-color:var(--navy);color:var(--navy)}
-.btn-sm{padding:6px 12px;font-size:12px}
-.btn-danger{background:var(--rose-l);color:var(--rose);border:1.5px solid #fecdd3}.btn-danger:hover{background:#fecdd3}
-.btn-amber{background:var(--amber-l);color:var(--amber);border:1.5px solid #fde68a}.btn-amber:hover{background:#fde68a}
-
-/* DIFF */
-.tag-new{background:var(--green-l);color:var(--green);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-.tag-changed{background:var(--amber-l);color:var(--amber);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-.tag-removed{background:var(--rose-l);color:var(--rose);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-.tag-same{background:var(--gray-l);color:var(--gray-t);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-
-.diff-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;margin-bottom:20px}
-.diff-table th{text-align:left;padding:8px 10px;border-bottom:1.5px solid var(--gray-l);color:var(--gray-t);font-weight:500}
-.diff-table td{padding:8px 10px;border-bottom:1px solid var(--gray-l);vertical-align:middle}
-.diff-table tr:last-child td{border-bottom:none}
-.diff-table tr.row-new{background:#f0fdf4}
-.diff-table tr.row-changed{background:#fffbeb}
-.diff-table tr.row-removed{background:#fff1f2;color:var(--gray-t)}
-.price-up{color:var(--rose);font-weight:500}
-.price-down{color:var(--green);font-weight:500}
-
-/* PRODUCTS TABLE */
-.prod-table{width:100%;border-collapse:collapse;font-size:13px}
-.prod-table th{text-align:left;padding:10px 12px;border-bottom:1.5px solid var(--gray-l);color:var(--gray-t);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
-.prod-table td{padding:9px 12px;border-bottom:1px solid var(--gray-l);vertical-align:middle}
-.prod-table tr:last-child td{border-bottom:none}
-.prod-table tr.hidden-row{opacity:.4}
-.prod-name{font-weight:500;color:var(--text);font-size:12px}
-.prod-spec{font-size:10px;color:var(--gray-t);margin-top:2px}
-
-input[type=text],input[type=number],input[type=password]{padding:7px 10px;border:1.5px solid var(--gray-l);border-radius:var(--rs);font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;background:#fff}
-input[type=text]:focus,input[type=number]:focus{border-color:var(--navy-mid)}
-
-.toggle-btn{width:38px;height:22px;border-radius:20px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
-.toggle-btn.on{background:var(--navy)}.toggle-btn.off{background:var(--gray-m)}
-.toggle-btn::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s}
-.toggle-btn.on::after{left:19px}.toggle-btn.off::after{left:3px}
-
-.img-cell{display:flex;align-items:center;gap:8px}
-.img-thumb{width:36px;height:36px;border-radius:6px;background:var(--off);border:1px solid var(--gray-l);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
-.img-thumb img{width:100%;height:100%;object-fit:contain}
-
-.table-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.search-mini{position:relative}
-.search-mini svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--gray-m)}
-.search-mini input{padding-left:30px;width:200px}
-
-.add-form{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:16px;padding-top:16px;border-top:1.5px solid var(--gray-l)}
-.add-form label{font-size:11px;color:var(--gray-t);display:block;margin-bottom:4px}
-.add-form input{width:100%}
-
-/* JSON import modal */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:16px;padding:28px;width:min(600px,94vw);max-height:85vh;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
-.modal-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:600}
-.modal textarea{min-height:200px;font-size:11px}
-.modal-footer{display:flex;justify-content:flex-end;gap:8px}
-
-.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:var(--rs);font-size:13px;font-weight:500;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;z-index:999}
-.toast.show{opacity:1;transform:translateY(0)}
-.steps{counter-reset:step;display:flex;flex-direction:column;gap:10px}
-.step{display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.6}
-.step-num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
-.wa-link{display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:9px 16px;border-radius:var(--rs);font-size:13px;font-weight:500;text-decoration:none;transition:background .15s}
-.wa-link:hover{background:#1ebe5d}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KALESI Admin · Productos</title>
+  <style>
+    :root {
+      --bg: #080808;
+      --panel: #111111;
+      --panel2: #171717;
+      --gold: #d6ad4d;
+      --gold2: #f1d783;
+      --text: #f8fafc;
+      --muted: #a1a1aa;
+      --line: rgba(214,173,77,.22);
+      --danger: #ef4444;
+      --ok: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(214,173,77,.18), transparent 32%),
+        radial-gradient(circle at 90% 0%, rgba(255,255,255,.08), transparent 30%),
+        linear-gradient(180deg, #050505, #111 45%, #070707);
+      min-height: 100vh;
+    }
+    button, input, select, textarea { font-family: inherit; }
+    button { cursor: pointer; }
+    .login {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+    }
+    .login-card {
+      width: min(460px, 100%);
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(17,17,17,.88);
+      border: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0,0,0,.44);
+      text-align: center;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(214,173,77,.25), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      color: var(--gold2);
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+    h1, h2, h3 { margin: 0; }
+    .login-card h1 { font-size: 28px; letter-spacing: -.5px; }
+    .login-card p { color: var(--muted); line-height: 1.5; }
+    .field { display: grid; gap: 7px; margin-bottom: 12px; text-align: left; }
+    label { color: #d4d4d8; font-size: 12px; font-weight: 800; }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.28);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 13px;
+      outline: none;
+    }
+    textarea { min-height: 86px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: rgba(214,173,77,.55); }
+    .primary {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 950;
+      color: #0b0b0b;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      box-shadow: 0 18px 40px rgba(214,173,77,.18);
+    }
+    .ghost {
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      background: rgba(255,255,255,.055);
+      border-radius: 999px;
+      padding: 11px 15px;
+      font-weight: 850;
+    }
+    .danger {
+      border: 1px solid rgba(239,68,68,.35);
+      color: #fecaca;
+      background: rgba(239,68,68,.12);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 850;
+    }
+    .app { display: none; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(16px);
+      background: rgba(8,8,8,.84);
+      border-bottom: 1px solid rgba(214,173,77,.18);
+    }
+    .top {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .top-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(214,173,77,.13);
+      border: 1px solid var(--line);
+      color: var(--gold2);
+      font-size: 22px;
+    }
+    .top-title small { display:block; margin-top:4px; color: var(--muted); }
+    .actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: flex-end; }
+    main {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 20px 16px 46px;
+      display: grid;
+      grid-template-columns: 390px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .panel {
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 24px;
+      background: rgba(17,17,17,.84);
+      box-shadow: 0 22px 60px rgba(0,0,0,.25);
+      overflow: hidden;
+    }
+    .panel-head {
+      padding: 17px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+    }
+    .panel-head h2 { font-size: 19px; }
+    .panel-body { padding: 18px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    .full { grid-column: 1 / -1; }
+    .form-actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 12px; }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 180px 150px;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .stat {
+      flex: 1;
+      min-width: 140px;
+      border-radius: 18px;
+      padding: 13px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .stat strong { display:block; font-size: 20px; color: var(--gold2); }
+    .stat span { color: var(--muted); font-size: 12px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 740px; }
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.075);
+      text-align: left;
+      vertical-align: middle;
+      font-size: 13px;
+    }
+    th { color: #d4d4d8; font-size: 11px; text-transform: uppercase; letter-spacing: .7px; }
+    td strong { display: block; margin-bottom: 3px; }
+    .thumb {
+      width: 56px; height: 56px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #fff;
+      color: #111;
+      font-size: 24px;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: contain; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 850;
+      background: rgba(214,173,77,.13);
+      color: var(--gold2);
+      border: 1px solid rgba(214,173,77,.18);
+    }
+    .pill.off { background: rgba(148,163,184,.12); color: #cbd5e1; border-color: rgba(148,163,184,.15); }
+    .row-actions { display: flex; gap: 7px; }
+    .icon-btn {
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.055);
+      color: #fff;
+      border-radius: 11px;
+      padding: 8px 10px;
+      font-weight: 900;
+    }
+    .help {
+      margin: 12px 0 0;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(214,173,77,.09);
+      border: 1px solid rgba(214,173,77,.17);
+      color: #f4f4f5;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      color: #090909;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 950;
+      box-shadow: 0 20px 50px rgba(0,0,0,.38);
+      opacity: 0;
+      visibility: hidden;
+      transition: .2s ease;
+      z-index: 20;
+    }
+    .toast.show { opacity: 1; visibility: visible; }
+    @media (max-width: 980px) {
+      main { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .top { align-items: flex-start; flex-direction: column; }
+      .actions { width: 100%; justify-content: stretch; }
+      .actions button, .actions a { flex: 1; text-align: center; }
+      .grid2 { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+    }
+  </style>
 </head>
 <body>
-
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">IN</div>
-    <h1>Panel Admin</h1>
-    <p>Importador del Norte</p>
-    <input type="password" id="pwd-input" placeholder="Contraseña" />
-    <button onclick="doLogin()">Ingresar</button>
-    <div class="login-err" id="login-err">Contraseña incorrecta</div>
-  </div>
-</div>
-
-<div id="admin-app">
-  <header>
-    <div class="brand">Importador del Norte <span>Panel Admin</span></div>
-    <button class="logout-btn" onclick="doLogout()">Cerrar sesión</button>
-  </header>
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('dashboard',this)">Dashboard</button>
-    <button class="tab" onclick="switchTab('cargar',this)">Cargar listado</button>
-    <button class="tab" onclick="switchTab('productos',this)">Productos</button>
-  </div>
-
-  <!-- DASHBOARD -->
-  <div id="tab-dashboard" class="main">
-    <div class="stats" id="stats-grid"></div>
-    <div class="section">
-      <div class="section-title">Publicar catálogo</div>
-      <p style="font-size:13px;color:var(--gray-t);margin-bottom:16px">Cuando termines de editar precios e imágenes, generá el <code>index.html</code> y subilo a Netlify.</p>
-      <button class="btn btn-green" onclick="saveAndExport()">↑ Generar index.html y descargar</button>
+  <section id="login" class="login">
+    <div class="login-card">
+      <div class="brand">K</div>
+      <h1>KALESI Admin</h1>
+      <p>Panel simple para editar catálogo y generar el archivo <b>products.json</b> que se sube a GitHub.</p>
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" placeholder="Ingresá la clave" />
+      </div>
+      <button id="loginBtn" class="primary" type="button">Entrar al panel</button>
+      <p style="font-size:12px;color:#71717a;margin-top:14px;">Clave inicial: <b>kalesi2026</b>. Cambiala dentro del código si querés usar otra.</p>
     </div>
-  </div>
+  </section>
 
-  <!-- CARGAR LISTADO -->
-  <div id="tab-cargar" class="main" style="display:none">
-    <div class="section">
-      <div class="section-title">¿Cómo cargar un listado nuevo?</div>
-      <div class="info-box">
-        <strong>El procesamiento con IA se hace en Claude, no acá.</strong> Esto evita errores de conexión y funciona siempre.
-      </div>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div>Copiá el texto del listado que te mandó el proveedor (WhatsApp, mail, lo que sea)</div></div>
-        <div class="step"><div class="step-num">2</div><div>Abrí Claude y pedile: <strong>"Procesá este listado y devolveme el JSON para importar en mi panel"</strong> — pegá el texto abajo del mensaje</div></div>
-        <div class="step"><div class="step-num">3</div><div>Claude te va a devolver el JSON comparado con tu catálogo actual + el JSON listo para importar</div></div>
-        <div class="step"><div class="step-num">4</div><div>Copiá ese JSON y usá el botón <strong>"Importar JSON"</strong> de abajo para cargarlo acá</div></div>
-        <div class="step"><div class="step-num">5</div><div>Revisá los cambios, ajustá lo que necesites y descargá el <code>index.html</code> actualizado</div></div>
-      </div>
-      <div style="margin-top:20px">
-        <a href="https://claude.ai" target="_blank" class="wa-link">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Abrir Claude
-        </a>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Importar JSON <span class="badge">Pegá el JSON que te dio Claude</span></div>
-      <div class="hint-box">Pegá acá el array JSON que te devolvió Claude. Va a reemplazar el catálogo actual conservando las imágenes que ya tenías cargadas.</div>
-      <textarea id="json-input" placeholder='[{"name":"...","specs":"...","cost":123,"cat":"...","emoji":"💻","img":"","visible":true}, ...]'></textarea>
-      <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="importJSON()">Importar y comparar</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('json-input').value=''">Limpiar</button>
-        <span id="import-status" style="font-size:12px;color:var(--gray-t)"></span>
-      </div>
-    </div>
-
-    <div id="diff-result" style="display:none">
-      <div class="section">
-        <div class="section-title">Comparación con catálogo anterior</div>
-        <div id="diff-content"></div>
-        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-green" onclick="applyImport()">✓ Aplicar cambios</button>
-          <button class="btn btn-ghost" onclick="cancelImport()">Cancelar</button>
+  <section id="app" class="app">
+    <header>
+      <div class="top">
+        <div class="top-title">
+          <div class="mark">K</div>
+          <div>
+            <h1>KALESI Admin</h1>
+            <small>Gestión de productos del catálogo</small>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="newBtn" class="ghost" type="button">Nuevo producto</button>
+          <button id="exportBtn" class="primary" type="button">Descargar products.json</button>
+          <a class="ghost" href="index.html" target="_blank" rel="noopener" style="text-decoration:none;">Ver tienda</a>
         </div>
       </div>
-    </div>
-  </div>
+    </header>
 
-  <!-- PRODUCTOS -->
-  <div id="tab-productos" class="main" style="display:none">
-    <div class="section">
-      <div class="section-title">Catálogo actual</div>
-      <div class="table-toolbar">
-        <div class="search-mini">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input type="text" placeholder="Buscar producto..." oninput="filterProdTable(this.value)" />
+    <main>
+      <section class="panel">
+        <div class="panel-head">
+          <h2 id="formTitle">Nuevo producto</h2>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="exportJSON()">↓ Exportar JSON</button>
-        <button class="btn btn-green btn-sm" onclick="saveAndExport()">↑ Generar index.html</button>
-      </div>
-      <div style="overflow-x:auto">
-        <table class="prod-table">
-          <thead><tr>
-            <th>Producto</th><th>Categoría</th><th>Costo U$S</th>
-            <th>Precio venta</th><th>Imagen</th><th>Visible</th><th></th>
-          </tr></thead>
-          <tbody id="prod-tbody"></tbody>
-        </table>
-      </div>
-      <div class="add-form">
-        <div><label>Nombre</label><input type="text" id="add-name" placeholder="ej: iPhone 16 Pro" /></div>
-        <div><label>Categoría</label><input type="text" id="add-cat" placeholder="ej: iPhone" /></div>
-        <div><label>Costo U$S</label><input type="number" id="add-cost" placeholder="0" /></div>
-        <div><label>Specs</label><input type="text" id="add-spec" placeholder="breve descripción" /></div>
-        <button class="btn btn-primary" onclick="addProduct()" style="margin-bottom:0">+ Agregar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-const PASS="gonza1411";
-const M=c=>c<=100?.25:c<=400?.20:c<=800?.15:c<=1500?.12:.10;
-const fP=n=>"U$S "+Math.round(n).toLocaleString('es-AR');
-const sP=c=>Math.ceil(c*(1+M(c)));
-
-const DEFAULT_PRODUCTS=[
-  {id:1,name:'MacBook Neo A18 Pro 13" 256GB',specs:"A18 Pro 6-Core · 8GB RAM · 256GB SSD · Silver/Citrus/Índigo/Blush",cost:730,cat:"MacBook",emoji:"💻",img:"https://http2.mlstatic.com/D_NQ_NP_2X_959697-CBT111461000673_052026-F.webp",visible:true},
-  {id:2,name:'MacBook Neo A18 Pro 13" 512GB',specs:"A18 Pro 6-Core · 8GB RAM · 512GB SSD · Índigo/Blush",cost:825,cat:"MacBook",emoji:"💻",img:"",visible:true},
-  {id:3,name:"Mosiso Case Cover MacBook Neo",specs:"Silver/Blush/Citrus/Índigo · cover teclado + vidrio templado",cost:60,cat:"Accesorios",emoji:"🧳",img:"",visible:true},
-  {id:4,name:'MacBook Air M5 13,6"',specs:"M5 10-Core · 16GB RAM · 512GB SSD · 8-Core GPU · Midnight",cost:1142,cat:"MacBook",emoji:"💻",img:"",visible:true},
-  {id:5,name:'MacBook Air M5 15,3"',specs:"M5 10-Core · 16GB RAM · 512GB SSD · Sky Blue/Midnight",cost:1360,cat:"MacBook",emoji:"💻",img:"",visible:true},
-  {id:6,name:'MacBook Pro M5 14,2" 512GB',specs:"M5 10-Core · 16GB RAM · 512GB SSD · Space Black",cost:1730,cat:"MacBook",emoji:"💻",img:"",visible:true},
-  {id:7,name:'MacBook Pro M5 14,2" 1TB',specs:"M5 10-Core · 16GB RAM · 1TB SSD · Silver",cost:1850,cat:"MacBook",emoji:"💻",img:"",visible:true},
-  {id:8,name:'MacBook Pro M5 14,2" 24GB',specs:"M5 10-Core · 24GB RAM · 1TB SSD · Space Black",cost:2130,cat:"MacBook",emoji:"💻",img:"",visible:true},
-  {id:9,name:'Dell 15" Touch',specs:"Ryzen 7 7730U · 16GB · 1TB SSD · FHD Touch · Win11",cost:840,cat:"Notebooks",emoji:"💻",img:"",visible:true},
-  {id:10,name:'HP OmniBook 5 Flip 14"',specs:'Core 7 150U · 16GB DDR5 · 512GB · 14" 2K Touch 360°',cost:910,cat:"Notebooks",emoji:"💻",img:"",visible:true},
-  {id:11,name:'HP OmniBook X Flip 16"',specs:"Core Ultra 7 256V · 16GB · 512GB · 16\" Touch 2en1",cost:950,cat:"Notebooks",emoji:"💻",img:"",visible:true},
-  {id:12,name:'HP Victus Gaming 15"',specs:"Ryzen 7 7445HS · 16GB DDR5 · RTX 4050 6GB · 144Hz",cost:1080,cat:"Notebooks",emoji:"🎮",img:"",visible:true},
-  {id:13,name:'Lenovo IdeaPad 1 15"',specs:"Ryzen 5 7520U · 8GB · 256GB · FHD · Win11 · Abyss Blue",cost:470,cat:"Notebooks",emoji:"💻",img:"",visible:true},
-  {id:14,name:'MSI Modern 15" Touch',specs:"Core 9 270H · 32GB DDR4 · 1TB PCIe 4.0 · FHD Touch",cost:1140,cat:"Notebooks",emoji:"💻",img:"",visible:true},
-  {id:15,name:'Tableta Toy Story 7"',specs:"7\" · 16GB · 1GB RAM · con protector y funda",cost:60,cat:"Tablets",emoji:"📱",img:"",visible:true},
-  {id:16,name:"Samsung Galaxy Tab S10 FE 128GB",specs:"128GB · incluye S Pen · Gray",cost:470,cat:"Tablets",emoji:"📱",img:"",visible:true},
-  {id:17,name:"Samsung Tab A11 Plus 8GB+256GB",specs:"8GB RAM · 256GB · Silver/Gray",cost:380,cat:"Tablets",emoji:"📱",img:"",visible:true},
-  {id:18,name:"Redmi Pad 2 Pro 256GB",specs:"8GB RAM · 256GB · Grafito",cost:345,cat:"Tablets",emoji:"📱",img:"",visible:true},
-  {id:19,name:"Redmi Pad 2 256GB",specs:"8GB RAM · 256GB · Grafito/Mint Green",cost:240,cat:"Tablets",emoji:"📱",img:"",visible:true},
-  {id:20,name:'iPad 11" A16 128GB',specs:"A16 · 128GB · Blue/Silver",cost:385,cat:"iPad",emoji:"📱",img:"",visible:true},
-  {id:21,name:'iPad 11" A16 256GB',specs:"A16 · 256GB · Pink",cost:500,cat:"iPad",emoji:"📱",img:"",visible:true},
-  {id:22,name:'iPad Air 13" M3 128GB',specs:"M3 · 128GB · Wi-Fi · Space Gray",cost:770,cat:"iPad",emoji:"📱",img:"",visible:true},
-  {id:23,name:"Apple AirPods Pro 3",specs:"Cancelación activa de ruido · MFHP4LL/A",cost:245,cat:"Audio",emoji:"🎧",img:"",visible:true},
-  {id:24,name:"Apple Magic Keyboard iPad 10/11th",specs:"US White · iPad 10th y 11th gen",cost:300,cat:"Accesorios",emoji:"⌨️",img:"",visible:true},
-  {id:25,name:'Apple Magic Keyboard iPad Air 13" M4',specs:'US White · iPad Air 13" M4',cost:350,cat:"Accesorios",emoji:"⌨️",img:"",visible:true},
-  {id:26,name:"Apple Pencil USB-C",specs:"MUWA3AM/A",cost:100,cat:"Accesorios",emoji:"✏️",img:"",visible:true},
-  {id:27,name:"Apple Magic Trackpad USB-C",specs:"MXKA3AM/A · Black",cost:180,cat:"Accesorios",emoji:"🖱️",img:"",visible:true},
-  {id:28,name:"Apple AirTag 4 Pack",specs:"MX542LL/A · Pack de 4 unidades",cost:95,cat:"Accesorios",emoji:"🏷️",img:"",visible:true},
-  {id:29,name:"Apple Watch SE 3 40mm",specs:"Starlight Sport S/M",cost:280,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:30,name:"Apple Watch SE 3 44mm",specs:"Midnight Sport M/L",cost:300,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:31,name:"Apple Watch Series 11 42mm",specs:"Rose Gold Sport · S/M y M/L",cost:355,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:32,name:"Apple Watch Series 11 46mm",specs:"Jet Black Sport M/L",cost:400,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:33,name:"Samsung Galaxy Watch 7 44mm",specs:"Silver · Bluetooth",cost:185,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:34,name:"Samsung Galaxy Watch 7 LTE 44mm",specs:"Silver/Green · LTE",cost:200,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:35,name:"Samsung Galaxy Watch 8 44mm",specs:"Silver",cost:265,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:36,name:"Samsung Galaxy Watch Ultra",specs:"Titanium Gray 2025 · SM-L705",cost:380,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:37,name:"Xiaomi Watch S4",specs:"Silver · M2425W1",cost:150,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:38,name:"Xiaomi Smart Band 9 Pro",specs:"Black & Silver",cost:70,cat:"Smartwatch",emoji:"⌚",img:"",visible:true},
-  {id:39,name:"Kindle Colorsoft Signature 2024",specs:'7" Color · 32GB · Metallic Black',cost:330,cat:"Kindle",emoji:"📖",img:"",visible:true},
-  {id:40,name:"Kindle Scribe 2024",specs:'10.2" · 64GB · Premium Pen · Jade/Tungsteno',cost:520,cat:"Kindle",emoji:"📖",img:"",visible:true},
-  {id:41,name:"Amazon Leather Case Original",specs:"Rosa · Paperwhite y Colorsoft",cost:30,cat:"Accesorios",emoji:"🧳",img:"",visible:true},
-  {id:42,name:"Anker Wireless Charging Stand",specs:"Carga rápida · Paperwhite y Colorsoft",cost:35,cat:"Accesorios",emoji:"🔌",img:"",visible:true},
-  {id:43,name:"Android Auto CarPlay Inalámbrico",specs:"Plug & play · cualquier auto con CarPlay/Android Auto",cost:20,cat:"CarPlay",emoji:"🚗",img:"",visible:true},
-  {id:44,name:"Android Auto CarPlay AI Box",specs:"CarPlay inalámbrico + Netflix/YouTube · Bluetooth + USB",cost:40,cat:"CarPlay",emoji:"🚗",img:"",visible:true},
-  {id:45,name:"Aspiradora Portátil DQ275",specs:"Portátil inalámbrica",cost:40,cat:"Accesorios",emoji:"🔧",img:"",visible:true},
-  {id:46,name:"Aspiradora Portátil ST-6691 Plus",specs:"Portátil inalámbrica",cost:40,cat:"Accesorios",emoji:"🔧",img:"",visible:true},
-];
-
-let products=[], pendingProducts=null, nextId=100, prodFilter='';
-
-function loadProducts(){
-  const s=localStorage.getItem('idn_products');
-  products = s ? JSON.parse(s) : JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-  nextId = Math.max(...products.map(p=>p.id),99)+1;
-}
-function saveProducts(){ localStorage.setItem('idn_products',JSON.stringify(products)); }
-
-// AUTH
-function doLogin(){
-  if(document.getElementById('pwd-input').value===PASS){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('admin-app').style.display='block';
-    loadProducts(); renderDashboard(); renderProdTable();
-  } else {
-    const e=document.getElementById('login-err');
-    e.style.display='block'; setTimeout(()=>e.style.display='none',2000);
-  }
-}
-function doLogout(){
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('admin-app').style.display='none';
-  document.getElementById('pwd-input').value='';
-}
-document.getElementById('pwd-input').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-
-// TABS
-function switchTab(name,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  ['dashboard','cargar','productos'].forEach(t=>{
-    document.getElementById('tab-'+t).style.display=t===name?'block':'none';
-  });
-  if(name==='productos') renderProdTable();
-  if(name==='dashboard') renderDashboard();
-}
-
-// DASHBOARD
-function renderDashboard(){
-  const vis=products.filter(p=>p.visible).length;
-  const hid=products.filter(p=>!p.visible).length;
-  const cats=new Set(products.map(p=>p.cat)).size;
-  const imgs=products.filter(p=>p.img).length;
-  document.getElementById('stats-grid').innerHTML=`
-    <div class="stat-card"><div class="stat-num">${products.length}</div><div class="stat-label">Total productos</div></div>
-    <div class="stat-card"><div class="stat-num" style="color:var(--green)">${vis}</div><div class="stat-label">Visibles</div></div>
-    <div class="stat-card"><div class="stat-num" style="color:var(--gray-t)">${hid}</div><div class="stat-label">Ocultos</div></div>
-    <div class="stat-card"><div class="stat-num">${cats}</div><div class="stat-label">Categorías</div></div>
-    <div class="stat-card"><div class="stat-num" style="color:${imgs===products.length?'var(--green)':'var(--amber)'}">${imgs}</div><div class="stat-label">Con imagen</div></div>`;
-}
-
-// IMPORT JSON
-function importJSON(){
-  const raw=document.getElementById('json-input').value.trim();
-  if(!raw){showToast('Pegá el JSON primero');return;}
-  try{
-    let clean=raw.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(clean);
-    if(!Array.isArray(parsed)||!parsed.length) throw new Error('No es un array válido');
-    pendingProducts=parsed.map((p,i)=>({
-      id: nextId+i,
-      name: p.name||'',
-      specs: p.specs||p.description||'',
-      cost: Number(p.cost)||0,
-      cat: p.cat||'General',
-      emoji: p.emoji||'📦',
-      img: p.img||'',
-      visible: p.visible!==undefined ? p.visible : true
-    }));
-    document.getElementById('import-status').textContent=`✓ ${pendingProducts.length} productos detectados`;
-    showDiff(products,pendingProducts);
-  } catch(e){
-    document.getElementById('import-status').textContent='✗ JSON inválido: '+e.message;
-    showToast('Error al parsear el JSON');
-  }
-}
-
-function showDiff(oldP,newP){
-  const newNames=new Set(newP.map(p=>p.name.toLowerCase().trim()));
-  const oldNames=new Set(oldP.map(p=>p.name.toLowerCase().trim()));
-  const added=newP.filter(p=>!oldNames.has(p.name.toLowerCase().trim()));
-  const removed=oldP.filter(p=>!newNames.has(p.name.toLowerCase().trim()));
-  const changed=newP.filter(np=>{
-    const op=oldP.find(o=>o.name.toLowerCase().trim()===np.name.toLowerCase().trim());
-    return op&&op.cost!==np.cost;
-  });
-  const same=newP.filter(np=>{
-    const op=oldP.find(o=>o.name.toLowerCase().trim()===np.name.toLowerCase().trim());
-    return op&&op.cost===np.cost;
-  });
-
-  let html=`<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-    <span class="tag-new">+${added.length} nuevos</span>
-    <span class="tag-changed">${changed.length} cambiaron precio</span>
-    <span class="tag-removed">${removed.length} se fueron</span>
-    <span class="tag-same">${same.length} sin cambios</span>
-  </div>`;
-
-  if(added.length){
-    html+=`<p style="font-size:11px;font-weight:500;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Nuevos productos</p>
-    <table class="diff-table"><thead><tr><th>Producto</th><th>Categoría</th><th>Costo</th><th>Precio venta</th></tr></thead><tbody>`;
-    added.forEach(p=>{html+=`<tr class="row-new"><td>${p.emoji} ${p.name}</td><td>${p.cat}</td><td>${fP(p.cost)}</td><td>${fP(sP(p.cost))}</td></tr>`;});
-    html+=`</tbody></table>`;
-  }
-  if(changed.length){
-    html+=`<p style="font-size:11px;font-weight:500;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;margin-top:16px">Cambios de precio</p>
-    <table class="diff-table"><thead><tr><th>Producto</th><th>Antes</th><th>Ahora</th><th>Dif.</th></tr></thead><tbody>`;
-    changed.forEach(np=>{
-      const op=oldP.find(o=>o.name.toLowerCase().trim()===np.name.toLowerCase().trim());
-      const d=np.cost-op.cost;
-      html+=`<tr class="row-changed"><td>${np.emoji} ${np.name}</td><td>${fP(op.cost)}</td><td class="${d>0?'price-up':'price-down'}">${fP(np.cost)}</td><td class="${d>0?'price-up':'price-down'}">${d>0?'↑':'↓'} U$S ${Math.abs(d)}</td></tr>`;
-    });
-    html+=`</tbody></table>`;
-  }
-  if(removed.length){
-    html+=`<p style="font-size:11px;font-weight:500;color:var(--rose);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;margin-top:16px">No están en el nuevo listado</p>
-    <table class="diff-table"><thead><tr><th>Producto</th><th>Categoría</th><th>Último precio</th></tr></thead><tbody>`;
-    removed.forEach(p=>{html+=`<tr class="row-removed"><td>${p.emoji} ${p.name}</td><td>${p.cat}</td><td>${fP(p.cost)}</td></tr>`;});
-    html+=`</tbody></table>`;
-  }
-
-  document.getElementById('diff-content').innerHTML=html;
-  document.getElementById('diff-result').style.display='block';
-}
-
-function applyImport(){
-  // preserve images from old products by name match
-  pendingProducts=pendingProducts.map(np=>{
-    const old=products.find(o=>o.name.toLowerCase().trim()===np.name.toLowerCase().trim());
-    return old?{...np,id:old.id,img:old.img||np.img}:np;
-  });
-  products=pendingProducts;
-  nextId=Math.max(...products.map(p=>p.id),99)+1;
-  saveProducts();
-  pendingProducts=null;
-  document.getElementById('diff-result').style.display='none';
-  document.getElementById('json-input').value='';
-  document.getElementById('import-status').textContent='';
-  showToast('✓ Catálogo actualizado');
-  renderDashboard();
-  renderProdTable();
-}
-function cancelImport(){
-  pendingProducts=null;
-  document.getElementById('diff-result').style.display='none';
-  document.getElementById('import-status').textContent='';
-}
-
-// PRODUCTS TABLE
-function renderProdTable(){
-  const q=prodFilter.toLowerCase();
-  const filtered=products.filter(p=>!q||p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q));
-  const tbody=document.getElementById('prod-tbody');
-  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="7" style="padding:32px;text-align:center;color:var(--gray-t)">No hay productos</td></tr>`;return;}
-  tbody.innerHTML=filtered.map(p=>`
-    <tr class="${p.visible?'':'hidden-row'}" id="row-${p.id}">
-      <td><div class="prod-name">${p.emoji} ${p.name}</div><div class="prod-spec">${p.specs}</div></td>
-      <td style="font-size:12px;color:var(--gray-t)">${p.cat}</td>
-      <td><input type="number" value="${p.cost}" onchange="updateCost(${p.id},this.value)" style="width:80px;font-size:12px;padding:5px 8px" /></td>
-      <td><span style="font-size:13px;font-weight:500;color:var(--navy)">${fP(sP(p.cost))}</span><span style="font-size:10px;color:var(--gray-t);display:block">+${Math.round(M(p.cost)*100)}%</span></td>
-      <td>
-        <div class="img-cell">
-          <div class="img-thumb">${p.img?`<img src="${p.img}" onerror="this.parentElement.textContent='${p.emoji}'" />`:`${p.emoji}`}</div>
-          <input type="text" value="${p.img||''}" placeholder="URL imagen..." onchange="updateImg(${p.id},this.value)" style="width:150px;font-size:11px;padding:5px 8px" />
+        <div class="panel-body">
+          <form id="productForm">
+            <input type="hidden" id="productId" />
+            <div class="grid2">
+              <div class="field full">
+                <label for="name">Nombre del producto *</label>
+                <input id="name" placeholder="Ej. Sony PS5 Slim Digital 1TB" required />
+              </div>
+              <div class="field">
+                <label for="cat">Categoría *</label>
+                <input id="cat" list="categoryList" placeholder="Gaming" required />
+                <datalist id="categoryList"></datalist>
+              </div>
+              <div class="field">
+                <label for="cost">Precio U$S</label>
+                <input id="cost" type="number" min="0" step="1" placeholder="690" />
+              </div>
+              <div class="field">
+                <label for="emoji">Emoji</label>
+                <input id="emoji" placeholder="🎮" />
+              </div>
+              <div class="field">
+                <label for="visible">Estado</label>
+                <select id="visible">
+                  <option value="true">Visible</option>
+                  <option value="false">Oculto</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="specs">Descripción / specs</label>
+                <textarea id="specs" placeholder="PlayStation 5 Slim Digital · 1TB SSD"></textarea>
+              </div>
+              <div class="field full">
+                <label for="img">URL de imagen</label>
+                <input id="img" placeholder="https://..." />
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="primary" type="submit">Guardar producto</button>
+              <button id="resetBtn" class="ghost" type="button">Limpiar</button>
+              <button id="deleteBtn" class="danger" type="button" style="display:none;">Eliminar</button>
+            </div>
+            <p class="help">
+              Este panel trabaja con archivo estático. Editás productos, descargás <b>products.json</b> y lo subís al repositorio de GitHub. Vercel publica el cambio automáticamente.
+            </p>
+          </form>
         </div>
-      </td>
-      <td><button class="toggle-btn ${p.visible?'on':'off'}" onclick="toggleVisible(${p.id},this)"></button></td>
-      <td><button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})">✕</button></td>
-    </tr>`).join('');
-}
+      </section>
 
-function filterProdTable(q){prodFilter=q;renderProdTable();}
-function updateCost(id,val){const p=products.find(p=>p.id===id);if(p){p.cost=Number(val)||0;saveProducts();renderProdTable();}}
-function updateImg(id,val){const p=products.find(p=>p.id===id);if(p){p.img=val.trim();saveProducts();renderProdTable();}}
-function toggleVisible(id,btn){
-  const p=products.find(p=>p.id===id);if(!p)return;
-  p.visible=!p.visible;btn.className='toggle-btn '+(p.visible?'on':'off');
-  document.getElementById('row-'+id).className=p.visible?'':'hidden-row';
-  saveProducts();showToast(p.visible?'Producto visible':'Producto oculto');
-}
-function deleteProduct(id){
-  if(!confirm('¿Eliminar este producto?'))return;
-  products=products.filter(p=>p.id!==id);saveProducts();renderProdTable();renderDashboard();showToast('Producto eliminado');
-}
-function addProduct(){
-  const name=document.getElementById('add-name').value.trim();
-  if(!name){showToast('Ingresá un nombre');return;}
-  products.push({id:nextId++,name,specs:document.getElementById('add-spec').value.trim(),cost:Number(document.getElementById('add-cost').value)||0,cat:document.getElementById('add-cat').value.trim()||'General',emoji:'📦',img:'',visible:true});
-  saveProducts();renderProdTable();renderDashboard();
-  ['add-name','add-cat','add-cost','add-spec'].forEach(id=>document.getElementById(id).value='');
-  showToast('✓ Producto agregado');
-}
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Catálogo</h2>
+        </div>
+        <div class="panel-body">
+          <div class="stats">
+            <div class="stat"><strong id="totalProducts">0</strong><span>productos</span></div>
+            <div class="stat"><strong id="visibleProducts">0</strong><span>visibles</span></div>
+            <div class="stat"><strong id="categoriesCount">0</strong><span>categorías</span></div>
+          </div>
+          <div class="toolbar">
+            <input id="search" type="search" placeholder="Buscar..." />
+            <select id="filterCategory"><option value="">Todas las categorías</option></select>
+            <select id="filterVisible">
+              <option value="">Todos</option>
+              <option value="true">Visibles</option>
+              <option value="false">Ocultos</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Imagen</th>
+                  <th>Producto</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </section>
 
-function exportJSON(){
-  const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='productos.json';a.click();
-}
+  <div id="toast" class="toast"></div>
 
-function saveAndExport(){
-  const visible=products.filter(p=>p.visible);
-  const blob=new Blob([generateIndex(JSON.stringify(visible))],{type:'text/html'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
-  showToast('✓ index.html generado — subilo a Netlify');
-}
+  <script>
+    const ADMIN_PASSWORD = "kalesi2026";
+    let products = [];
+    const $ = id => document.getElementById(id);
 
-function generateIndex(prodsJSON){
-return `<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Importador del Norte — Tecnología importada</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0f2557;--navy-mid:#1a3a6b;--navy-light:#2a52a0;--off:#f5f6fa;--gray-l:#e8ecf4;--gray-m:#b0b8cc;--gray-t:#5a6380;--text:#0d1b3e;--r:14px;--rs:8px}
-body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text)}
-header{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(15,37,87,.3)}
-.hi{max-width:1280px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.lc{width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,.2);background:var(--navy-mid);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff}
-.lc img{width:100%;height:100%;object-fit:cover}
-.bn{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;display:block}
-.bs{font-size:11px;color:rgba(255,255,255,.5)}
-.hs{flex:1;max-width:360px;position:relative}
-.hs svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.4);width:16px;height:16px}
-.hs input{width:100%;padding:9px 14px 9px 38px;border-radius:30px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
-.hs input::placeholder{color:rgba(255,255,255,.4)}
-.hs input:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.13)}
-.wa{display:flex;align-items:center;gap:7px;background:#25d366;color:#fff;font-size:13px;font-weight:500;padding:9px 16px;border-radius:30px;text-decoration:none;white-space:nowrap;font-family:'DM Sans',sans-serif}
-.wa:hover{background:#1ebe5d}.wa svg{width:16px;height:16px}
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(200,16,46,.12)}
-.h2{position:relative;max-width:640px;margin:0 auto}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:12px}
-.hero h1 span{color:#e8a0a8}
-.hero p{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:28px}
-.hst{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.sn{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff}
-.sl{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
-.fw{background:#fff;border-bottom:1px solid var(--gray-l);position:sticky;top:68px;z-index:90}
-.fi{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;height:52px}
-.fi::-webkit-scrollbar{display:none}
-.fl{font-size:11px;font-weight:500;color:var(--gray-m);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;margin-right:4px;flex-shrink:0}
-.cb{white-space:nowrap;flex-shrink:0;padding:6px 14px;border-radius:30px;border:1.5px solid var(--gray-l);background:transparent;color:var(--gray-t);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
-.cb:hover{border-color:var(--navy-mid);color:var(--navy-mid)}.cb.active{background:var(--navy);border-color:var(--navy);color:#fff}
-.gw{max-width:1280px;margin:0 auto;padding:28px 24px 48px}
-.ri{font-size:13px;color:var(--gray-t);margin-bottom:20px}.ri strong{color:var(--text)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.card{background:#fff;border-radius:var(--r);border:1.5px solid var(--gray-l);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,border-color .18s,box-shadow .18s}
-.card:hover{transform:translateY(-3px);border-color:var(--navy-light);box-shadow:0 8px 24px rgba(15,37,87,.1)}
-.ci{width:100%;aspect-ratio:1/1;background:var(--off);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:42px}
-.ci img{width:100%;height:100%;object-fit:contain;padding:16px;display:none}
-.cb2{padding:13px;flex:1;display:flex;flex-direction:column;gap:5px}
-.badge{font-size:10px;padding:3px 9px;border-radius:20px;background:#e8ecf4;color:var(--navy-mid);font-weight:500;display:inline-block;width:fit-content}
-.cn{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
-.cs{font-size:11px;color:var(--gray-t);line-height:1.55;flex:1}
-.pr{display:flex;align-items:baseline;gap:7px;margin-top:6px;flex-wrap:wrap}
-.cp{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--navy)}
-.wb{margin-top:10px;display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:9px;border-radius:var(--rs);background:#25d366;border:none;color:#fff;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:background .15s}
-.wb:hover{background:#1ebe5d}.wb svg{width:15px;height:15px}
-footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:12px}
-footer strong{color:rgba(255,255,255,.8)}
-@media(max-width:600px){.wa span{display:none}.wa{padding:9px 12px}.hero{padding:36px 20px 32px}.grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}.gw{padding:20px 16px 40px}}
-</style>
-</head>
-<body>
-<header><div class="hi">
-  <a href="#" class="brand">
-    <div class="lc"><img src="logo.png" alt="IN" onerror="this.style.display='none'" />IN</div>
-    <div><span class="bn">Importador del Norte</span><span class="bs">Tecnología importada</span></div>
-  </a>
-  <div class="hs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="si" placeholder="Buscar productos..." oninput="fs()" /></div>
-  <a href="https://wa.me/5491151571106?text=Hola!%20Quiero%20consultar%20sobre%20sus%20productos." target="_blank" class="wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span>Consultar por WhatsApp</span></a>
-</div></header>
-<section class="hero"><div class="h2">
-  <h1>Tecnología importada<br><span>al mejor precio</span></h1>
-  <p>MacBooks, iPads, Notebooks, Smartwatches y más — stock renovado cada semana</p>
-  <div class="hst">
-    <div><div class="sn" id="sc">0</div><div class="sl">Productos</div></div>
-    <div><div class="sn" id="cc">0</div><div class="sl">Categorías</div></div>
-    <div><div class="sn">🇺🇸</div><div class="sl">Importado USA</div></div>
-  </div>
-</div></section>
-<div class="fw"><div class="fi" id="fb"><span class="fl">Categoría:</span><button class="cb active" data-cat="all" onclick="fc('all',this)">Todos</button></div></div>
-<div class="gw"><p class="ri" id="ri"></p><div class="grid" id="grid"></div></div>
-<footer><strong>Importador del Norte</strong> · Tecnología importada directo desde USA<br>Consultá disponibilidad · Stock sujeto a cambios · Precios en dólares</footer>
-<script>
-const WA="5491151571106";
-const M=c=>c<=100?.25:c<=400?.20:c<=800?.15:c<=1500?.12:.10;
-const fP=n=>"U$S "+Math.round(n).toLocaleString('es-AR');
-const sP=c=>Math.ceil(c*(1+M(c)));
-const P=${prodsJSON};
-let cc='all',sq='';
-function bf(){const cats=[...new Set(P.map(p=>p.cat))];const b=document.getElementById('fb');cats.forEach(cat=>{const btn=document.createElement('button');btn.className='cb';btn.dataset.cat=cat;btn.textContent=cat;btn.onclick=()=>fc(cat,btn);b.appendChild(btn);});}
-function fc(cat,btn){cc=cat;document.querySelectorAll('.cb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');r();}
-function fs(){sq=document.getElementById('si').value.toLowerCase();r();}
-function wl(n,p){return'https://wa.me/'+WA+'?text='+encodeURIComponent('Hola! Me interesa *'+n+'* — '+p+'. ¿Está disponible?');}
-function r(){
-  const f=P.filter(p=>{const mc=cc==='all'||p.cat===cc;const mq=!sq||p.name.toLowerCase().includes(sq)||p.specs.toLowerCase().includes(sq)||p.cat.toLowerCase().includes(sq);return mc&&mq;});
-  document.getElementById('ri').innerHTML='Mostrando <strong>'+f.length+'</strong> producto'+(f.length!==1?'s':'')+' · Precios con margen incluido';
-  document.getElementById('sc').textContent=P.length;
-  document.getElementById('cc').textContent=new Set(P.map(p=>p.cat)).size;
-  const g=document.getElementById('grid');
-  if(!f.length){g.innerHTML='<div style="grid-column:1/-1;padding:60px;text-align:center;color:#5a6380">📦 No se encontraron productos</div>';return;}
-  g.innerHTML=f.map(p=>{
-    const imgH=p.img?'<img src="'+p.img+'" alt="'+p.name.replace(/"/g,"'")+'" onload="this.style.display=\'block\';this.previousElementSibling.style.display=\'none\'" onerror="this.style.display=\'none\'" /><span>'+p.emoji+'</span>':'<span>'+p.emoji+'</span>';
-    return '<div class="card"><div class="ci">'+imgH+'</div><div class="cb2"><span class="badge">'+p.cat+'</span><div class="cn">'+p.name+'</div><div class="cs">'+p.specs+'</div><div class="pr"><span class="cp">'+fP(sP(p.cost))+'</span></div><a href="'+wl(p.name,fP(sP(p.cost)))+'" target="_blank" class="wb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Consultar por WhatsApp</a></div></div>';
-  }).join('');
-}
-bf();r();
-<\/script>
-</body></html>`;}
+    const login = $("login");
+    const app = $("app");
+    const password = $("password");
+    const loginBtn = $("loginBtn");
+    const form = $("productForm");
+    const formTitle = $("formTitle");
+    const productId = $("productId");
+    const nameInput = $("name");
+    const catInput = $("cat");
+    const costInput = $("cost");
+    const emojiInput = $("emoji");
+    const visibleInput = $("visible");
+    const specsInput = $("specs");
+    const imgInput = $("img");
+    const resetBtn = $("resetBtn");
+    const deleteBtn = $("deleteBtn");
+    const exportBtn = $("exportBtn");
+    const newBtn = $("newBtn");
+    const tableBody = $("tableBody");
+    const searchInput = $("search");
+    const filterCategory = $("filterCategory");
+    const filterVisible = $("filterVisible");
+    const toast = $("toast");
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
-}
-</script>
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function formatPrice(cost) {
+      const value = Number(cost);
+      return value > 0 ? `U$S ${value.toLocaleString("es-AR")}` : "A cotizar";
+    }
+
+    function nextId() {
+      return products.length ? Math.max(...products.map(p => Number(p.id) || 0)) + 1 : 1;
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("products.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("No products.json");
+        products = await response.json();
+      } catch (_) {
+        products = [];
+        showToast("No encontré products.json. Podés cargar productos desde cero.");
+      }
+      render();
+    }
+
+    function getCategories() {
+      return [...new Set(products.map(p => p.cat).filter(Boolean))].sort((a,b) => a.localeCompare(b));
+    }
+
+    function updateCategoryControls() {
+      const cats = getCategories();
+      $("categoryList").innerHTML = cats.map(cat => `<option value="${cat}"></option>`).join("");
+      const current = filterCategory.value;
+      filterCategory.innerHTML = `<option value="">Todas las categorías</option>` + cats.map(cat => `<option value="${cat}">${cat}</option>`).join("");
+      filterCategory.value = cats.includes(current) ? current : "";
+    }
+
+    function filteredProducts() {
+      const term = searchInput.value.trim().toLowerCase();
+      return products.filter(p => {
+        const matchesTerm = !term || `${p.name} ${p.specs} ${p.cat}`.toLowerCase().includes(term);
+        const matchesCat = !filterCategory.value || p.cat === filterCategory.value;
+        const matchesVisible = !filterVisible.value || String(Boolean(p.visible)) === filterVisible.value;
+        return matchesTerm && matchesCat && matchesVisible;
+      });
+    }
+
+    function render() {
+      updateCategoryControls();
+      $("totalProducts").textContent = products.length;
+      $("visibleProducts").textContent = products.filter(p => p.visible).length;
+      $("categoriesCount").textContent = getCategories().length;
+
+      const rows = filteredProducts();
+      tableBody.innerHTML = rows.map(p => `
+        <tr>
+          <td><div class="thumb">${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.outerHTML='${p.emoji || "📦"}'">` : (p.emoji || "📦")}</div></td>
+          <td><strong>${p.name}</strong><span style="color:#a1a1aa">${p.specs || ""}</span></td>
+          <td><span class="pill">${p.cat || "Sin categoría"}</span></td>
+          <td><b>${formatPrice(p.cost)}</b></td>
+          <td><span class="pill ${p.visible ? "" : "off"}">${p.visible ? "Visible" : "Oculto"}</span></td>
+          <td>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" onclick="editProduct(${p.id})">Editar</button>
+              <button class="icon-btn" type="button" onclick="toggleVisible(${p.id})">${p.visible ? "Ocultar" : "Mostrar"}</button>
+            </div>
+          </td>
+        </tr>
+      `).join("") || `<tr><td colspan="6" style="text-align:center;color:#a1a1aa;padding:28px;">No hay productos para mostrar.</td></tr>`;
+    }
+
+    function resetForm() {
+      formTitle.textContent = "Nuevo producto";
+      productId.value = "";
+      form.reset();
+      emojiInput.value = "📦";
+      visibleInput.value = "true";
+      deleteBtn.style.display = "none";
+    }
+
+    window.editProduct = function(id) {
+      const p = products.find(item => Number(item.id) === Number(id));
+      if (!p) return;
+      formTitle.textContent = "Editar producto";
+      productId.value = p.id;
+      nameInput.value = p.name || "";
+      catInput.value = p.cat || "";
+      costInput.value = Number(p.cost) || "";
+      emojiInput.value = p.emoji || "📦";
+      visibleInput.value = String(Boolean(p.visible));
+      specsInput.value = p.specs || "";
+      imgInput.value = p.img || "";
+      deleteBtn.style.display = "inline-flex";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.toggleVisible = function(id) {
+      const p = products.find(item => Number(item.id) === Number(id));
+      if (!p) return;
+      p.visible = !p.visible;
+      render();
+      showToast(p.visible ? "Producto visible" : "Producto oculto");
+    }
+
+    function saveProduct(event) {
+      event.preventDefault();
+      const id = productId.value ? Number(productId.value) : nextId();
+      const data = {
+        id,
+        name: nameInput.value.trim(),
+        specs: specsInput.value.trim(),
+        cost: Number(costInput.value) || 0,
+        cat: catInput.value.trim(),
+        emoji: emojiInput.value.trim() || "📦",
+        img: imgInput.value.trim(),
+        visible: visibleInput.value === "true"
+      };
+      if (!data.name || !data.cat) {
+        showToast("Completá nombre y categoría");
+        return;
+      }
+      const index = products.findIndex(p => Number(p.id) === id);
+      if (index >= 0) products[index] = data;
+      else products.unshift(data);
+      resetForm();
+      render();
+      showToast("Producto guardado");
+    }
+
+    function deleteCurrentProduct() {
+      if (!productId.value) return;
+      if (!confirm("¿Eliminar este producto?")) return;
+      products = products.filter(p => Number(p.id) !== Number(productId.value));
+      resetForm();
+      render();
+      showToast("Producto eliminado");
+    }
+
+    function exportProducts() {
+      const blob = new Blob([JSON.stringify(products, null, 2)], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "products.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showToast("Archivo products.json descargado");
+    }
+
+    function enterAdmin() {
+      if (password.value !== ADMIN_PASSWORD) {
+        showToast("Clave incorrecta");
+        return;
+      }
+      sessionStorage.setItem("kalesi_admin", "1");
+      login.style.display = "none";
+      app.style.display = "block";
+      loadProducts();
+    }
+
+    loginBtn.addEventListener("click", enterAdmin);
+    password.addEventListener("keydown", e => { if (e.key === "Enter") enterAdmin(); });
+    form.addEventListener("submit", saveProduct);
+    resetBtn.addEventListener("click", resetForm);
+    deleteBtn.addEventListener("click", deleteCurrentProduct);
+    exportBtn.addEventListener("click", exportProducts);
+    newBtn.addEventListener("click", resetForm);
+    searchInput.addEventListener("input", render);
+    filterCategory.addEventListener("change", render);
+    filterVisible.addEventListener("change", render);
+
+    if (sessionStorage.getItem("kalesi_admin") === "1") {
+      login.style.display = "none";
+      app.style.display = "block";
+      loadProducts();
+    }
+    resetForm();
+  </script>
 </body>
 </html>

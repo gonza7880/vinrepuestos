@@ -1213,7 +1213,7 @@
     const closeHeaderSearch = document.getElementById("closeHeaderSearch");
     const navCategories = Array.from(document.querySelectorAll(".nav-category[data-category]"));
 
-    const products = [
+    let products = [
 
     {
     "id": 100,
@@ -1737,7 +1737,7 @@
     "visible": true
   },
   
-];
+];;
 
     const grid = document.getElementById("grid");
     const search = document.getElementById("search");
@@ -2078,9 +2078,25 @@
       }
     });
 
+
+    async function loadProductsFromJson() {
+      try {
+        const response = await fetch("products.json", { cache: "no-store" });
+        if (!response.ok) return;
+        const remoteProducts = await response.json();
+        if (Array.isArray(remoteProducts) && remoteProducts.length) {
+          products = remoteProducts;
+        }
+      } catch (_) {
+        // Si products.json no carga, se usa el catálogo embebido como respaldo.
+      }
+    }
+
     loadCustomer();
-    render();
-    renderCart();
+    loadProductsFromJson().finally(() => {
+      render();
+      renderCart();
+    });
   </script>
 </body>
 </html>

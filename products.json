@@ -1,0 +1,522 @@
+[
+  {
+    "id": 100,
+    "name": "Iphone todos los modelos",
+    "specs": "Consultar modelos",
+    "cost": 0,
+    "cat": "Iphone",
+    "emoji": "📦",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDB3Z_Jd_1AI_8LOhL56DW6erzIXadV8q-Sg&s",
+    "visible": true
+  },
+  {
+    "id": 101,
+    "name": "Sony PS5 Console CD Edition Slim 1TB",
+    "specs": "PlayStation 5 Slim · Lector Blu-Ray · 1TB SSD",
+    "cost": 775,
+    "cat": "Gaming",
+    "emoji": "🎮",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_870071-MLA99964558223_112025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 102,
+    "name": "Sony PS5 Console Digital Edition Slim 1TB",
+    "specs": "PlayStation 5 Slim Digital · 1TB SSD",
+    "cost": 690,
+    "cat": "Gaming",
+    "emoji": "🎮",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_952720-MLA96637493042_112025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 103,
+    "name": "Joystick Controller Wireless DualSense",
+    "specs": "Control inalámbrico Sony DualSense",
+    "cost": 120,
+    "cat": "Gaming",
+    "emoji": "🎮",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_960057-MLA95735790612_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 104,
+    "name": "Meta Quest 3 128GB",
+    "specs": "Realidad Virtual · 128GB",
+    "cost": 440,
+    "cat": "Gaming",
+    "emoji": "🥽",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_901655-MLA94134417812_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 105,
+    "name": "Meta Quest 3 512GB",
+    "specs": "Realidad Virtual · 512GB",
+    "cost": 800,
+    "cat": "Gaming",
+    "emoji": "🥽",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_901655-MLA94134417812_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 106,
+    "name": "Xbox Series X 1TB",
+    "specs": "Microsoft Xbox Series X · 1TB SSD",
+    "cost": 855,
+    "cat": "Gaming",
+    "emoji": "🎮",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_809285-MLA96417564024_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 107,
+    "name": "Nintendo Switch 2 256GB",
+    "specs": "Nintendo Switch 2 · 256GB",
+    "cost": 675,
+    "cat": "Gaming",
+    "emoji": "🎮",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_639054-MLA99972036971_112025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 108,
+    "name": "Nintendo Switch 2 + Mario Kart 256GB",
+    "specs": "Nintendo Switch 2 · Mario Kart Bundle · 256GB",
+    "cost": 755,
+    "cat": "Gaming",
+    "emoji": "🎮",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_851671-MLA99508047546_112025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 1,
+    "name": "MacBook Neo A18 Pro 13\" 256GB",
+    "specs": "A18 Pro 6-Core · 8GB RAM · 256GB SSD · Silver/Citrus/Índigo/Blush",
+    "cost": 830,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_959697-CBT111461000673_052026-F.webp",
+    "visible": true
+  },
+  {
+    "id": 2,
+    "name": "MacBook Neo A18 Pro 13\" 512GB",
+    "specs": "A18 Pro 6-Core · 8GB RAM · 512GB SSD · Índigo/Blush",
+    "cost": 920,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_959697-CBT111461000673_052026-F.webp",
+    "visible": true
+  },
+  {
+    "id": 3,
+    "name": "Mosiso Case Cover MacBook Neo",
+    "specs": "Silver/Blush/Citrus/Índigo · cover teclado + vidrio templado",
+    "cost": 75,
+    "cat": "Accesorios",
+    "emoji": "🧳",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_865421-MLA110987621787_042026-F.webp",
+    "visible": true
+  },
+  {
+    "id": 4,
+    "name": "MacBook Air M5 13,6\"",
+    "specs": "M5 10-Core · 16GB RAM · 512GB SSD · 8-Core GPU · Midnight",
+    "cost": 1270,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://buenosairesimport.com/9097-home_default/macbook-air-136-mdha4-m5-chip-10-core-8-core-gpu-16gb-512gb-starlight-.jpg",
+    "visible": true
+  },
+  {
+    "id": 5,
+    "name": "MacBook Air M5 15,3\"",
+    "specs": "M5 10-Core · 16GB RAM · 512GB SSD · Sky Blue/Midnight",
+    "cost": 1520,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_991347-CBT107634137148_032026-F.webp",
+    "visible": true
+  },
+  {
+    "id": 6,
+    "name": "MacBook Pro M5 14,2\" 512GB",
+    "specs": "M5 10-Core · 16GB RAM · 512GB SSD · Space Black",
+    "cost": 1900,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_673114-MLA95496896861_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 7,
+    "name": "MacBook Pro M5 14,2\" 1TB",
+    "specs": "M5 10-Core · 16GB RAM · 1TB SSD · Silver",
+    "cost": 2020,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_673114-MLA95496896861_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 8,
+    "name": "MacBook Pro M5 14,2\" 24GB",
+    "specs": "M5 10-Core · 24GB RAM · 1TB SSD · Space Black",
+    "cost": 2340,
+    "cat": "MacBook",
+    "emoji": "💻",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_2X_673114-MLA95496896861_102025-F.webp",
+    "visible": true
+  },
+  {
+    "id": 9,
+    "name": "Dell 15\" Touch",
+    "specs": "Ryzen 7 7730U · 16GB · 1TB SSD · FHD Touch · Win11",
+    "cost": 940,
+    "cat": "Notebooks",
+    "emoji": "💻",
+    "img": "https://www.venex.com.ar/products_images/1778169208_notebook-dell-inspiron-3535-amd-ryzen-7-7730u-16gb-ssd-512gb-156jpg",
+    "visible": true
+  },
+  {
+    "id": 10,
+    "name": "HP OmniBook 5 Flip 14\"",
+    "specs": "Core 7 150U · 16GB DDR5 · 512GB · 14\" 2K Touch 360°",
+    "cost": 1000,
+    "cat": "Notebooks",
+    "emoji": "💻",
+    "img": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRyOsLxJ0WhxA7fGuGxMh43FX_INomEEm-WAI9TK2QwqZEk2uwR1oBEW_VzVoAv1ykQwnSYhbUGZsvtAevAgEgIg9PdVF9u",
+    "visible": true
+  },
+  {
+    "id": 11,
+    "name": "HP OmniBook X Flip 16\"",
+    "specs": "Core Ultra 7 256V · 16GB · 512GB · 16\" Touch 2en1",
+    "cost": 1060,
+    "cat": "Notebooks",
+    "emoji": "💻",
+    "img": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRyOsLxJ0WhxA7fGuGxMh43FX_INomEEm-WAI9TK2QwqZEk2uwR1oBEW_VzVoAv1ykQwnSYhbUGZsvtAevAgEgIg9PdVF9u",
+    "visible": true
+  },
+  {
+    "id": 12,
+    "name": "HP Victus Gaming 15\"",
+    "specs": "Ryzen 7 7445HS · 16GB DDR5 · RTX 4050 6GB · 144Hz",
+    "cost": 1200,
+    "cat": "Notebooks",
+    "emoji": "🎮",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSE6Wq5y6g0B20ImX33l-Pd8q93EuU0Kvg85oRZuJ5SwPej76k9tl4JZ0QOfnvOVshAAIIiDNxLrmLzUv-F0GRyDSRQYcTUeuPyf_nKI6WkzJn3TPZx5Yqre1Y",
+    "visible": true
+  },
+  {
+    "id": 13,
+    "name": "Lenovo IdeaPad 1 15\"",
+    "specs": "Ryzen 5 7520U · 8GB · 256GB · FHD · Win11 · Abyss Blue",
+    "cost": 540,
+    "cat": "Notebooks",
+    "emoji": "💻",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRK60DKFMAcq-Tt5u0aaTuSTA9dLFQylWY77SO_SXzZSj9yDKWuVDRd6H2_044qGJYXFbayNWGq-pBG3fAu7rqTOWcBlujHbSNxRRtNLqo8jRvaeb1xibGzZg",
+    "visible": true
+  },
+  {
+    "id": 14,
+    "name": "MSI Modern 15\" Touch",
+    "specs": "Core 9 270H · 32GB DDR4 · 1TB PCIe 4.0 · FHD Touch",
+    "cost": 1270,
+    "cat": "Notebooks",
+    "emoji": "💻",
+    "img": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTMTTDdSY9oKWkj31GBlUtd3y3UN6DeTNEjYjSQwro9WMjAgFja6nuUu3d-Hp2sSVSArVoaihlInkeI9JbJX9evBLTydAkWXlk1hJmg1bWWIOC2Ze7mgJH8DhQ",
+    "visible": true
+  },
+  {
+    "id": 15,
+    "name": "Tableta Toy Story 7\"",
+    "specs": "7\" · 16GB · 1GB RAM · con protector y funda",
+    "cost": 75,
+    "cat": "Tablets",
+    "emoji": "📱",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_986135-MLA86368465906_062025-O.webp",
+    "visible": true
+  },
+  {
+    "id": 16,
+    "name": "Samsung Galaxy Tab S10 FE 128GB",
+    "specs": "128GB · incluye S Pen · Gray",
+    "cost": 540,
+    "cat": "Tablets",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSdSapkF3CVCuDv4l0-C0GdWFiB_rCurzFG__0cd9UMwYREHQHDOr2oZwvml3IQIKC1zfA4TBE-uLHvpnWJFg2lG3L1PCeQWdHHHyyZEbZ-7v3vA56OR52U8gMwvsptWcEpggxQc7w&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 17,
+    "name": "Samsung Tab A11 Plus 8GB+256GB",
+    "specs": "8GB RAM · 256GB · Silver/Gray",
+    "cost": 450,
+    "cat": "Tablets",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRIaHZohDGrBYiS282ghedilHSXKurP5rxRbmtjY78o01-CMCVixBrytU1U3lEvUbxrH_ga1ntV4PiqkGqCX9cXHu7yVlvMgJTdhiL8hB4IZyC1a7dgjL05Sn0tVddtUA674zqL3lAWXCw&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 18,
+    "name": "Redmi Pad 2 Pro 256GB",
+    "specs": "8GB RAM · 256GB · Grafito",
+    "cost": 410,
+    "cat": "Tablets",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcThdxMqk7BtRFgr0GLg7Rfztcm2P14P29v9jSIRmN_gjk98fqzpQRh9YbTX_aJjeb0jgxs-CfN5vEwkQR0uK4A4MM5luqwX_OTVfAdSOCXmFv-Iihx9Dpnwox17uk3fBXmWqhsd_qI&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 19,
+    "name": "Redmi Pad 2 256GB",
+    "specs": "8GB RAM · 256GB · Grafito/Mint Green",
+    "cost": 280,
+    "cat": "Tablets",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcThdxMqk7BtRFgr0GLg7Rfztcm2P14P29v9jSIRmN_gjk98fqzpQRh9YbTX_aJjeb0jgxs-CfN5vEwkQR0uK4A4MM5luqwX_OTVfAdSOCXmFv-Iihx9Dpnwox17uk3fBXmWqhsd_qI&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 20,
+    "name": "iPad 11\" A16 128GB",
+    "specs": "A16 · 128GB · Blue/Silver",
+    "cost": 460,
+    "cat": "iPad",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQcFuK-3ASQGnfPGLkW6_OMh30FkaXdwNAmUGe0SnvjtzNwWK6erm1lxvGn6mPsSIXfPXRmUC9_Q2wr2wcfnHEYckROddGexDsEWXqZhxQp24kmbera5fKoRnt3Yy2QYt7Zt2D5Yw&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 21,
+    "name": "iPad 11\" A16 256GB",
+    "specs": "A16 · 256GB · Pink",
+    "cost": 570,
+    "cat": "iPad",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQcFuK-3ASQGnfPGLkW6_OMh30FkaXdwNAmUGe0SnvjtzNwWK6erm1lxvGn6mPsSIXfPXRmUC9_Q2wr2wcfnHEYckROddGexDsEWXqZhxQp24kmbera5fKoRnt3Yy2QYt7Zt2D5Yw&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 22,
+    "name": "iPad Air 13\" M3 128GB",
+    "specs": "M3 · 128GB · Wi-Fi · Space Gray",
+    "cost": 880,
+    "cat": "iPad",
+    "emoji": "📱",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQcFuK-3ASQGnfPGLkW6_OMh30FkaXdwNAmUGe0SnvjtzNwWK6erm1lxvGn6mPsSIXfPXRmUC9_Q2wr2wcfnHEYckROddGexDsEWXqZhxQp24kmbera5fKoRnt3Yy2QYt7Zt2D5Yw&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 23,
+    "name": "Apple AirPods Pro 3",
+    "specs": "Cancelación activa de ruido · MFHP4LL/A",
+    "cost": 290,
+    "cat": "Audio",
+    "emoji": "🎧",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQGlptsluNx36icYlONlS0AqNzwqkGOhOCDfxIF5Fo_xDN8H4XwZbIgYeyWZgDZVvZXVDmxteM-1jUv2KMJgMZ6r2pW0UgEnECNg9XQFc_b-FQFOeGlf5fi8HJq0kbEUuLCwXqepFA&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 24,
+    "name": "Apple Magic Keyboard iPad 10/11th",
+    "specs": "US White · iPad 10th y 11th gen",
+    "cost": 360,
+    "cat": "Accesorios",
+    "emoji": "⌨️",
+    "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSyv30HMGk0_ekpkKrVT6WEfeAAUrT_SAfmpgjxsrbybVv4AqsZpOSzQPVrR4CsXLLfwgBwpySvl2jebBNAZcY2XIGqt_Q3IjO_9Pqp-QZLfi9GQyu5IjAE1sR2gNedulmFUlcwq97KIc0&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 25,
+    "name": "Apple Magic Keyboard iPad Air 13\" M4",
+    "specs": "US White · iPad Air 13\" M4",
+    "cost": 420,
+    "cat": "Accesorios",
+    "emoji": "⌨️",
+    "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSyv30HMGk0_ekpkKrVT6WEfeAAUrT_SAfmpgjxsrbybVv4AqsZpOSzQPVrR4CsXLLfwgBwpySvl2jebBNAZcY2XIGqt_Q3IjO_9Pqp-QZLfi9GQyu5IjAE1sR2gNedulmFUlcwq97KIc0&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 26,
+    "name": "Apple Pencil USB-C",
+    "specs": "MUWA3AM/A",
+    "cost": 125,
+    "cat": "Accesorios",
+    "emoji": "✏️",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSbDawxSBPtt5062H5cJx47v0ZOoa2jlOu__mYmOVBSrn3M76BVQtxNBVgvWtHlsGunNpay2LrHaTjGVYcgW06rxfPyQgwCMHuSR29NACR4-1SKw-CRyB6iF1LsPF2ntUzcI2TQDA&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 27,
+    "name": "Apple Magic Trackpad USB-C",
+    "specs": "MXKA3AM/A · Black",
+    "cost": 210,
+    "cat": "Accesorios",
+    "emoji": "🖱️",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxNbdijpZwdmt8civkKhquKdAGYdrtqEuRuw&s",
+    "visible": true
+  },
+  {
+    "id": 28,
+    "name": "Apple AirTag 4 Pack",
+    "specs": "MX542LL/A · Pack de 4 unidades",
+    "cost": 120,
+    "cat": "Accesorios",
+    "emoji": "🏷️",
+    "img": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRegslSk0Ar1_PGNYffnlnYuKWe_ZPIvswRHWGvsypXN7cPYFXuI8fV81hYMRXRNyVmtAbcZZoh0PD4yxUwya0y8B7aARPlrolzbx88Lwqg7h_SHlRY287xMd-ileUUnH2JgsRx7JafBhw&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 29,
+    "name": "Apple Watch SE 3 40mm",
+    "specs": "Starlight Sport S/M",
+    "cost": 330,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ-JETBFvCjkw5eDTT7L9FT5yPokXxCkwm3bT2yEpNK76HSN8UiFBp6zdTz0o2S6KXatuKbmpx5BAdUnj_lRrRb9wTJywMlpYIEj_Kcloy22KD7rw36A7qeuTLupAu2eFRmg7W_C8w&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 30,
+    "name": "Apple Watch SE 3 44mm",
+    "specs": "Midnight Sport M/L",
+    "cost": 360,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTRHwxkauy6d-GsvdR8kTQDulwoywncGO7_m_KxGs56PgR8x40ILHY7ox0B5_UvLCB1hx2O7WKlN_dvtxi8BK-BmBg1Sn3giXLw-LmrAjvFqaIDRWcQPh-yCJxGBPnIEGPWlgc_ZN8&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 31,
+    "name": "Apple Watch Series 11 42mm",
+    "specs": "Rose Gold Sport · S/M y M/L",
+    "cost": 420,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSQhfgz3sfyus2GqPujqQPDOYevslqfszpmPyFIdOQd4ItLzS4OqOHhqFYXfo6ZPELBw2t8uR6JjUFUrYpL1eJu7b5mlcdkh09B09JD2GgQRst8fg9PQZ8p8cMw8HDezpVIUXWT4w&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 32,
+    "name": "Apple Watch Series 11 46mm",
+    "specs": "Jet Black Sport M/L",
+    "cost": 480,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRPQUQWR_XOMY9NSGOibBLJ5455DN2QZ4bo5XqrQe433TLTdR27m53ic0j0_MB6x42l0fjQX3Qj3jUhkx1KiIvwsXDSadXYxR4Ip7MmjgxSjUalQ0LXDGZMa9FEhbu5rADTAK4s1w&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 33,
+    "name": "Samsung Galaxy Watch 7 44mm",
+    "specs": "Silver · Bluetooth",
+    "cost": 220,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ_aZX9SDOrnKG5PY_FHzTAt83B6nEAplC8ZqdEZjP6BV5Aks6wI5I2eFQG3zd9TZP26Kwzeprd4SisBeLXT4x7pgn53KRvLwPqy_HK6-k3-KjJVs_YYGQftm25C11YM0RBcdhrojk&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 34,
+    "name": "Samsung Galaxy Watch 7 LTE 44mm",
+    "specs": "Silver/Green · LTE",
+    "cost": 240,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ_aZX9SDOrnKG5PY_FHzTAt83B6nEAplC8ZqdEZjP6BV5Aks6wI5I2eFQG3zd9TZP26Kwzeprd4SisBeLXT4x7pgn53KRvLwPqy_HK6-k3-KjJVs_YYGQftm25C11YM0RBcdhrojk&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 35,
+    "name": "Samsung Galaxy Watch 8 44mm",
+    "specs": "Silver",
+    "cost": 310,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRAjAYEvpgYhu0yayyhdokETKjvL1UhtEaURnxFBqxFlMHmIwQBqVAO7zZrF385az3671SqkYhia_0YFyAfc5EiNEKc1fKaMxsxV6ywE-WsZOcFd-HyvXbNoae2EhdeX9gg3FwYAWY&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 36,
+    "name": "Samsung Galaxy Watch Ultra",
+    "specs": "Titanium Gray 2025 · SM-L705",
+    "cost": 450,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRLp2t_C1der39VyvlvdC17UxnpTX314J042RpAvg-orZiFA0uQItC8AkExdeyy8VShAA7XWBvfZ2MKwYvWeu1G029EaAW7Bdjq1lITx9k7JA3n1wsznRJrH18LyZ8OFXAh40Rqbqw&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 37,
+    "name": "Xiaomi Watch S4",
+    "specs": "Silver · M2425W1",
+    "cost": 180,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTtjc5B1jHrMAWKO2nkWc0jMBxoJINrMgY_jsvHZ47wETWOjhVXgdU4apy3CY7s0Rc7PjKEEmTK1nVVO1xfcRJKA6Tie83ghbzH8MmbLabLvwT7stfug1lfwcOokkFXjMoFsfjSbrk&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 38,
+    "name": "Xiaomi Smart Band 9 Pro",
+    "specs": "Black & Silver",
+    "cost": 90,
+    "cat": "Smartwatch",
+    "emoji": "⌚",
+    "img": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQeiBQka8P7ptITMrlXJ6uT_0Cr4sugz2Yty4a5c3oukorEl2Akhfk0rP_DuRAtwLt8VFj-K3vn8Nu36Au-Byi8twxTmsKVPWbsR_PIwXnsd8mO4tPB-5El3NODg8ru56e8jaGpTQ&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 42,
+    "name": "Anker Wireless Charging Stand",
+    "specs": "Carga rápida · Paperwhite y Colorsoft",
+    "cost": 40,
+    "cat": "Accesorios",
+    "emoji": "🔌",
+    "img": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQrtyH3rtQi9K0SbAs4tJZmKkhJ_0QYspcVQcgZ8UuD0gkG6Fs5Cgn19ERSbWCh8EIt8O4RFtPnCeT_bcIIwhedKTKNLDjvhwjnUw_S9SwzbK8DvOmlXds2MEb_ztBZz7z_w4RM0A&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 43,
+    "name": "Android Auto CarPlay Inalámbrico",
+    "specs": "Plug & play · cualquier auto con CarPlay/Android Auto",
+    "cost": 25,
+    "cat": "CarPlay",
+    "emoji": "🚗",
+    "img": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR3RKOnPLRGbD8S-vUyuSyUFJMp0bn_e68iewwF8FTnfTV3fb3TLxvym8B9Yv6-rovIKTjnWO3T-g6zYtNh-d9vark-1lVqThURR0ZIwaLKfTnYlNKPcybhEi07nBNx-lk-yGrDK213iz4&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 44,
+    "name": "Android Auto CarPlay AI Box",
+    "specs": "CarPlay inalámbrico + Netflix/YouTube · Bluetooth + USB",
+    "cost": 50,
+    "cat": "CarPlay",
+    "emoji": "🚗",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRolr8q5AWmyt9zDrhT17FWZ0sskD2YvVj0Kg&s",
+    "visible": true
+  },
+  {
+    "id": 45,
+    "name": "Aspiradora Portátil DQ275",
+    "specs": "Portátil inalámbrica",
+    "cost": 50,
+    "cat": "Accesorios",
+    "emoji": "🔧",
+    "img": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTlyhLs9YmKt4IAhxKN5ZJDVuik9i0uAYvYlZOcG0vScHIQj1MIti8LZw6dRDcRaCHC8RtAdQAC7z0TFAhYGc8FLBexDISqYuQgw08pTS8fY5yupfdBpdngJXMYZuA6d0GxONFNT12ThQ&usqp=CAc",
+    "visible": true
+  },
+  {
+    "id": 46,
+    "name": "Aspiradora Portátil ST-6691 Plus",
+    "specs": "Portátil inalámbrica",
+    "cost": 50,
+    "cat": "Accesorios",
+    "emoji": "🔧",
+    "img": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRyVrtk1cCWlQRhhmxcIDhfJUeS7aZpzD6ehce5lPM0uwbXNZ9nXQsindGobuMr5V0oR_DcHYbsJzV6rFE2nP5P2yEa-eQZ41P5SDra_IYVoSdHh60iEqAxQoQkQ9dr_zEjzwb8bY_a7g&usqp=CAc",
+    "visible": true
+  }
+]
